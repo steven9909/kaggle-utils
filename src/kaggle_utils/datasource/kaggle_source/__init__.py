@@ -1,5 +1,5 @@
 from enum import Enum
-from datasource.local_datasource import LocalDataSource
+from kaggle_utils.datasource.local_datasource import LocalDataSource
 from pathlib import Path
 import shutil
 import kaggle
