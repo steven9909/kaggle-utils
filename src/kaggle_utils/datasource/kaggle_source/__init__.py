@@ -13,34 +13,54 @@ class KaggleAPIType(str, Enum):
 
 
 class KaggleSource(LocalDataSource):
+    """
+    Kaggle Data Source
+
+    Args:
+        data_dir (Path): data directory
+
+    Attribute:
+        dir (Path): data directory
+        zip (Path): data zip file
+    """
+
     def __init__(self, data_dir: Path, name: str, api: KaggleAPIType):
+
         super().__init__(data_dir / name.split("/").pop())
-        self.api = api
+        self.zip = self.dir.with_suffix(".zip")
         self.name = name
+        self.api = api
 
     def download(self):
+        """
+        Downloads data using Kaggle API
+        """
+
         if self.api == KaggleAPIType.COMPETITION:
-            kaggle.api.competition_download_cli(self.name, path=self.data_dir)
+            kaggle.api.competition_download_cli(self.name, path=self.dir)
+
         elif self.api == KaggleAPIType.DATASET:
-            kaggle.api.dataset_download_cli(self.name, path=self.data_dir)
+            kaggle.api.dataset_download_cli(self.name, path=self.dir)
+
         else:
             raise TypeError(
                 f"expected either KaggleAPIType.COMPETITION or KaggleAPIType.DATASET but got {type(self.api)} instead"
             )
 
-        if not self.data_dir.exists():
-            with zipfile.ZipFile(self.data_zip, "r") as z:
-                z.extractall(self.data_dir)
+        if not self.dir.exists():
+            with zipfile.ZipFile(self.zip, "r") as z:
+                z.extractall(self.dir)
 
     def remove(self):
         """
-        remove all files from the paths self.data_dir and self.data_zip
+        Removes data directory and data zip file
         """
-        self.data_zip.unlink()
-        shutil.rmtree(self.data_dir)
 
-    def check_if_exists(self):
-        """
-        check existence for data zip file and the data directory file lazily
-        """
-        return self.data_zip.exists() and self.data_dir.exists()
+        if self.dir.exists():
+            shutil.rmtree(self.dir)
+
+        if self.zip.exists():
+            self.zip.unlink()
+
+    def check_exists(self):
+        return self.zip.exists() and self.dir.exists()
