@@ -1,7 +1,9 @@
 from pathlib import Path
-from typing import Iterator, Protocol
+from typing import Iterator
+
+from kaggle_utils.datasource.type import DataSourceType
 
 
-class IImage(Protocol):
+class IImage(DataSourceType):
     def iter_images(self) -> Iterator[Path]:
         raise NotImplementedError()
