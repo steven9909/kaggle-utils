@@ -24,7 +24,7 @@ class KaggleSource(LocalDataSource):
         elif self.api == KaggleAPIType.DATASET:
             kaggle.api.dataset_download_cli(self.name, path=self.data_dir)
         else:
-            raise TypeError(f"Expected either KaggleAPIType.COMPETITION or KaggleAPIType.DATASET but got {type(self.api)} instead")
+            raise TypeError(f"expected either KaggleAPIType.COMPETITION or KaggleAPIType.DATASET but got {type(self.api)} instead")
 
         if not self.data_dir.exists():
             with zipfile.ZipFile(self.data_zip, "r") as z:
