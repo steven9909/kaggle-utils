@@ -7,6 +7,7 @@ name = "kaggle_utils"
 version = "0.0.1"
 authors = [
   { name="Benny Huang", email="j.benny.huang.developer@gmail.com" },
+  { name="Steven Hyun", email="sshyun@uwaterloo.ca" }
 ]
 description = "Kaggle Utilities"
 readme = "README.md"
