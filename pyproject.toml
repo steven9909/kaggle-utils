@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kaggle_utils"
+version = "0.0.1"
+authors = [
+  { name="Benny Huang", email="j.benny.huang.developer@gmail.com" },
+]
+description = "Kaggle Utilities"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/steven9909/kaggle-utils"
+"Bug Tracker" = "https://github.com/steven9909/kaggle-utils/issues"
