@@ -3,7 +3,6 @@ from urllib.parse import urlparse
 
 import requests
 from kaggle_utils.datasource.kaggle import KaggleAPIType, KaggleDataSource
-from kaggle_utils.datasource.type.image import IImage
 from kaggle_utils.datasource.type.image.classification import IImageClassification
 
 
