@@ -3,8 +3,9 @@ import zipfile
 from enum import Enum
 from pathlib import Path
 
-import kaggle
 from kaggle_utils.datasource.local_datasource import LocalDataSource
+
+import kaggle
 
 
 class KaggleAPIType(str, Enum):
@@ -12,7 +13,7 @@ class KaggleAPIType(str, Enum):
     DATASET = "dataset"
 
 
-class KaggleSource(LocalDataSource):
+class KaggleDataSource(LocalDataSource):
     """
     Kaggle Data Source
 
@@ -44,7 +45,8 @@ class KaggleSource(LocalDataSource):
 
         else:
             raise TypeError(
-                f"expected either KaggleAPIType.COMPETITION or KaggleAPIType.DATASET but got {type(self.api)} instead"
+                "expected either KaggleAPIType.COMPETITION or KaggleAPIType.DATASET but"
+                f"got {type(self.api)} instead"
             )
 
         if not self.dir.exists():
